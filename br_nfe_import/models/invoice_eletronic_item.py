@@ -10,4 +10,4 @@ class InvoiceEletronicItem(models.Model):
 
     product_ean = fields.Char('EAN do Produto')
     product_cprod = fields.Char('Código Interno do Produto')
-    product_xnome = fields.Char('Nome do produto')
+    product_xprod = fields.Char('Nome do produto')

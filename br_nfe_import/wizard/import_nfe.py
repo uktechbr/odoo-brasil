@@ -116,7 +116,8 @@ class WizardImportNfe(models.TransientModel):
             'valor_bruto': valor_bruto, 'desconto': desconto, 'seguro': seguro,
             'frete': frete, 'outras_despesas': outras_despesas,
             'indicador_total': indicador_total, 'tipo_produto': tipo_produto,
-            'cfop': cfop, 'ncm': ncm,
+            'cfop': cfop, 'ncm': ncm, 'product_ean': item.prod.cEAN,
+            'product_cprod': item.prod.cProd; 'product_xprod': item.prod.xprod,
         })
 
     def get_items(self, nfe):
