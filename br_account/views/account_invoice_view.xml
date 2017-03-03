@@ -75,7 +75,7 @@
                                 <field name="serie" attrs="{'required': [('document_type', 'in', ('nf', 'nfrural', 'cf'))]}"/>
                                 <field name="internal_number" attrs="{'required': [('document_type', 'in', ('nf', 'nfrural', 'cf'))]}"/>
                                 <field name="fiscal_document_id" attrs="{'required': [('document_type', 'in', ('nf', 'nfrural', 'cf'))]}"/>
-                                <field name="state_id" attrs="{'required': [('document_type', 'in', ('nf', 'nfrural'))], 'invisible': [('document_type', '=', 'cf')]}"/>
+                                <field name="state_id" attrs="{'required': [('document_type', 'in', ('nf', 'nfrural'))], 'invisible': [('document_type', '=', 'cf')]}" options="{'no_create': True, 'no_create_edit': True}" />
                                 <field name="date" attrs="{'required': [('document_type', 'in', ('nf', 'nfrural'))], 'invisible': [('document_type', '=', 'cf')]}"/>
                                 <field name="cpfcnpj_type" attrs="{'required': [('document_type', 'in', ('nfrural'))], 'invisible': [('document_type', '!=', 'nfrural')]}"/>
                                 <field name="cnpj_cpf" attrs="{'required': [('document_type', 'in', ('nf', 'nfrural'))], 'invisible': [('document_type', '=', 'cf')]}"/>
@@ -83,6 +83,9 @@
                             </group>
                         </form>
                     </field>
+                </group>
+                <group string="Mensagens Documento Eletrônico">
+                    <field name="fiscal_observation_ids" nolabel="1"/>
                 </group>
                 <group string="Observações">
                     <field name="comment" nolabel="1"/>
@@ -102,6 +105,17 @@
                 <field name="total_desconto" widget='monetary' options="{'currency_field': 'currency_id'}"/>
                 <field name="total_tax" widget='monetary' options="{'currency_field': 'currency_id'}"/>
             </field>
+        </field>
+    </record>
+
+    <record id="view_br_account_invoice_cancel_form" model="ir.ui.view">
+        <field name="name">br_account.invoice.cancel.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account_cancel.invoice_form_cancel_inherit"/>
+        <field name="arch" type="xml">
+            <button name="action_invoice_cancel" position="replace">
+                <button name="action_invoice_cancel_paid" type="object" states="draft,proforma2,open,paid" string="Cancelar Fatura" groups="account.group_account_invoice"/>
+            </button>
         </field>
     </record>
 
@@ -125,6 +139,9 @@
                 <field name="document_serie_id" attrs="{'invisible': [('issuer','=', '0')]}" />
                 <field name="vendor_number" attrs="{'invisible': [('issuer','=', '1')]}" />
                 <field name="vendor_serie" attrs="{'invisible': [('issuer','=', '1')]}" />
+            </field>
+            <field name="payment_term_id" position="attributes">
+                <attribute name="attrs"></attribute>
             </field>
             <xpath expr="//field[@name='invoice_line_ids']/tree" position="attributes">
                 <attribute name="editable"></attribute>
@@ -151,6 +168,9 @@
                 </page>
             </xpath>
             <xpath expr="//notebook/page[last()]/group" position="after">
+                <group string="Observações Fiscais">
+                    <field name="fiscal_observation_ids" nolabel="1"/>
+                </group>
                 <group string="Observações">
                     <field name="comment" nolabel="1"/>
                 </group>
@@ -169,6 +189,17 @@
                 <field name="total_desconto" widget='monetary' options="{'currency_field': 'currency_id'}"/>
                 <field name="total_tax"  widget='monetary' options="{'currency_field': 'currency_id'}"/>
             </field>
+        </field>
+    </record>
+
+    <record id="view_br_account_invoice_supplier_cancel_form" model="ir.ui.view">
+        <field name="name">br_account.invoice.supplier.cancel.form</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account_cancel.invoice_supplier_cancel_form_inherit"/>
+        <field name="arch" type="xml">
+            <button name="action_invoice_cancel" position="replace">
+                <button name="action_invoice_cancel_paid" type="object" states="draft,proforma2,open,paid" string="Cancelar Fatura" groups="account.group_account_invoice"/>
+            </button>
         </field>
     </record>
 
@@ -218,6 +249,9 @@
                                     <field name="company_id" groups="base.group_multi_company" readonly="1"/>
                                     <field name="invoice_line_tax_ids" invisible="1" />
                                     <field name="tax_simples_id" attrs="{'invisible': [('company_fiscal_type', '==', '3')] }" />
+                                    <field name="tributos_estimados_federais" />
+                                    <field name="tributos_estimados_estaduais" />
+                                    <field name="tributos_estimados_municipais" />
                                     <field name="tributos_estimados" />
                                     <field name="calculate_tax" invisible="1" />
                                 </group>
@@ -343,7 +377,7 @@
                                         <field name="name"/>
                                         <field name="date_registration"/>
                                         <field name="location"/>
-                                        <field name="state_id"/>
+                                        <field name="state_id" options="{'no_create': True, 'no_create_edit': True}"/>
                                         <field name="date_release"/>
                                         <field name="type_transportation"/>
                                     </tree>
@@ -352,7 +386,7 @@
                                             <group>
                                                 <field name="name"/>
                                                 <field name="date_registration"/>
-                                                <field name="state_id"/>
+                                                <field name="state_id" options="{'no_create': True, 'no_create_edit': True}"/>
                                                 <field name="location"/>
                                                 <field name="date_release"/>
                                                 <field name="type_transportation" />
@@ -361,7 +395,7 @@
                                                 <field name="afrmm_value" />
                                                 <field name="type_import" />
                                                 <field name="thirdparty_cnpj" />
-                                                <field name="thirdparty_state_id"/>
+                                                <field name="thirdparty_state_id" options="{'no_create': True, 'no_create_edit': True}"/>
                                                 <field name="exporting_code"/>
                                             </group>
                                             <group string="Adições" colspan="4">

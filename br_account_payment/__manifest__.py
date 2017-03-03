@@ -15,9 +15,11 @@
     'website': 'http://www.trustcode.com.br',
     'contributors': [
         'Danimar Ribeiro <danimaribeiro@gmail.com>',
+        'Carlos Alberto Cipriano Korovsky <carlos.korovsky@uktech.com.br',
     ],
     'depends': [
         'br_account',
+        'account_accountant',
     ],
     'data': [
         'security/ir.model.access.csv',
