@@ -21,7 +21,7 @@ class WizardImportNfe(models.TransientModel):
     payment_term_id = fields.Many2one('account.payment.term',
                                       string='Forma de Pagamento')
     invoice_id = fields.Many2one('account.invoice', string='Fatura')
-    serie = fields.Many2one('invoice.eletronic', string="Série")
+    serie = fields.Many2one('br_account.document.serie', string="Série")
 
     def get_identificacao(self, nfe):
         company = self.env['res.partner'].search([

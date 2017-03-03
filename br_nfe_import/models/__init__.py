@@ -2,5 +2,4 @@
 # © 2016 Alessandro Fernandes Martini <alessandrofmartini@gmail.com>, Trustcode
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from . import wizard
-from . import models
+from . import invoice_eletronic_item
