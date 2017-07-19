@@ -19,7 +19,9 @@ class AccountJournal(models.Model):
     @api.multi
     def write(self, vals):
         result = super(AccountJournal, self).write(vals)
-        for journal in self.filtered(lambda r: r.type == 'bank' and r.bank_account_id):
+        journal_ids = self.filtered(
+            lambda r: r.type == 'bank' and r.bank_account_id)
+        for journal in journal_ids:
             bank_account = journal.bank_account_id
             if not bank_account.acc_number_dig or\
                not bank_account.bra_number or\
@@ -47,4 +49,3 @@ class AccountJournal(models.Model):
             }
             journal.bank_account_id.write(bank_account_vals)
         return journal
-

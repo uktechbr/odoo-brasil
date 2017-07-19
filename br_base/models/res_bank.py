@@ -60,12 +60,13 @@ class ResPartnerBank(models.Model):
     bra_number = fields.Char(u'Agência', size=8)
     bra_number_dig = fields.Char(u'Dígito Agência', size=8)
 
-    @api.depends('bank_id', 'acc_number', 'acc_number_dig', 'bra_number', 'bra_number_dig')
+    @api.depends('bank_id', 'acc_number', 'acc_number_dig',
+                 'bra_number', 'bra_number_dig')
     def _compute_sanitized_acc_number(self):
         for bank_account in self:
             if bank_account.bank_id:
                 acc_number_format = bank_account.bank_id.acc_number_format \
-                                    or '%(acc_number)s'
+                    or '%(acc_number)s'
                 args = {
                     'bra_number': bank_account.bra_number or '',
                     'bra_number_dig': bank_account.bra_number_dig or '',

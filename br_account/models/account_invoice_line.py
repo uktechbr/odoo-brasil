@@ -292,9 +292,10 @@ class AccountInvoiceLine(models.Model):
     icms_valor_credito = fields.Float(
         u"Valor de Crédito", compute='_compute_price', store=True)
     icms_st_aliquota_deducao = fields.Float(
-        string=u"% Dedução", help="Alíquota interna ou interestadual aplicada \
+        string=u"% ICMS Próprio",
+        help="Alíquota interna ou interestadual aplicada \
          sobre o valor da operação para deduzir do ICMS ST - Para empresas \
-         do Simples Nacional")
+         do Simples Nacional ou usado em casos onde existe apenas ST sem ICMS")
 
     # =========================================================================
     # ISSQN

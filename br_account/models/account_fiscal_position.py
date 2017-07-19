@@ -57,9 +57,10 @@ class AccountFiscalPositionTaxRule(models.Model):
     reducao_ipi = fields.Float(string=u"Redução de base IPI")
     aliquota_mva = fields.Float(string=u"Alíquota MVA")
     icms_st_aliquota_deducao = fields.Float(
-        string=u"% Dedução", help="Alíquota interna ou interestadual aplicada \
+        string=u"% ICMS Próprio",
+        help="Alíquota interna ou interestadual aplicada \
          sobre o valor da operação para deduzir do ICMS ST - Para empresas \
-         do Simples Nacional")
+         do Simples Nacional ou usado em casos onde existe apenas ST sem ICMS")
     tem_difal = fields.Boolean(string="Aplicar Difal?")
     tax_icms_inter_id = fields.Many2one(
         'account.tax', help=u"Alíquota utilizada na operação Interestadual",
